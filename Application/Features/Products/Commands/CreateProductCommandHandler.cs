@@ -26,7 +26,7 @@ namespace Application.Features.ProductFeatures.Commands
                 Description = request.Description
             };
             _context.Products.Add(product);
-            await _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return product.Id;
         }
     }

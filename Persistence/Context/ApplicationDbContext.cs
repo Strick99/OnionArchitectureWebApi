@@ -12,7 +12,8 @@ namespace Persistence.Context
         {
         }
         public DbSet<Product> Products { get; set; }
-        public async Task<int> SaveChanges()
+
+        public async Task<int> SaveChangesAsync()
         {
             return await base.SaveChangesAsync();
         }

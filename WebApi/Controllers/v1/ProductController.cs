@@ -18,19 +18,11 @@ namespace WebApi.Controllers.v1
         {
             return Ok(await Mediator.Send(new CreateProductCommand(request.Name,
                                                                    request.Barcode,
+                                                                   request.IsActive,
                                                                    request.Description,
                                                                    request.BuyingPrice,
                                                                    request.Rate)));
         }
-
-        //public async Task<IActionResult> Create([FromBody]CreateProductCommandDto request)
-        //{
-        //    return Ok(await Mediator.Send(new CreateProductCommand(request.Name,
-        //                                                           request.Barcode,
-        //                                                           request.Description,
-        //                                                           request.BuyingPrice,
-        //                                                           request.Rate)));
-        //}
 
         /// <summary>
         /// Gets all Products.
