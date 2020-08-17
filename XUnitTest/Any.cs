@@ -67,21 +67,19 @@ namespace XUnitTest
 
         public static Product ProductEntity(string name = null, 
                                             string barcode = null, 
-                                            bool? isActive = false, 
+                                            bool isActive = false, 
                                             string description = null, 
                                             decimal? rate = null, 
-                                            decimal? buyingPrice = null, 
-                                            string confidentialData = null)
+                                            decimal? buyingPrice = null)
         {
             return new Product
             {
                 Name = name ?? RandomString(),
                 Barcode = barcode ?? RandomString(),
-                IsActive = isActive ?? true,
+                IsActive = isActive,
                 Description = description ?? RandomString(),
                 Rate = rate ?? RandomDecimal(),
-                BuyingPrice = buyingPrice ?? RandomDecimal(),
-                ConfidentialData = confidentialData ?? RandomString()
+                BuyingPrice = buyingPrice ?? RandomDecimal()
             };
         }
 
