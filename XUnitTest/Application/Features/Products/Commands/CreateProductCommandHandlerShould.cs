@@ -20,7 +20,7 @@ namespace XUnitTest.Application.Features.Products.Commands
             _command = new CreateProductCommand(Any.RandomString(), Any.RandomString(), true, Any.RandomString(), Any.RandomDecimal(), Any.RandomDecimal());
             _handler = new CreateProductCommandHandler(_contextMock.Object);            
             _contextMock.Setup(x => x.Products.Add(new Product()));
-            _contextMock.Setup(x => x.SaveChanges()).ReturnsAsync(1);
+            _contextMock.Setup(x => x.SaveChangesAsync()).ReturnsAsync(1);
             //_context = GetContext();
         }        
 
@@ -40,7 +40,7 @@ namespace XUnitTest.Application.Features.Products.Commands
                                                                   )
                                                     ), Times.Once);
 
-            _contextMock.Verify(m => m.SaveChanges(), Times.Once);
+            _contextMock.Verify(m => m.SaveChangesAsync(), Times.Once);
         }
 
         //private ApplicationDbContext GetContext()
