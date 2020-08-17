@@ -9,13 +9,13 @@ using Xunit;
 
 namespace XUnitTest.Controllers.Products
 {
-    public class ProductsControllerShould
+    public class ProductControllerShould
     {
         private readonly ProductController _productController;
         private readonly Mock<IMediator> _mediatorMock;
         private readonly CreateProductCommandDto _commandDto;
 
-        public ProductsControllerShould()
+        public ProductControllerShould()
         {
             _commandDto = Any.CreateProductCommandDto();
             _mediatorMock = new Mock<IMediator>();
