@@ -1,22 +1,32 @@
 ﻿using Application.Features.ProductFeatures.Commands;
 using Application.Features.ProductFeatures.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace WebApi.Controllers.v1
 {
+    [ApiController]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
-    public class ProductController : BaseApiController
+    public class ProductController : ControllerBase
     {
+        private readonly IMediator _mediator;
+
+        public ProductController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
         /// <summary>
         /// Creates a New Product.
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]        
-        public async Task<IActionResult> Create([FromBody]CreateProductCommandDto request)
+        public async Task<IActionResult> CreateProduct([FromBody]CreateProductCommandDto request)
         {
-            return Ok(await Mediator.Send(new CreateProductCommand(request.Name,
+            return Ok(await _mediator.Send(new CreateProductCommand(request.Name,
                                                                    request.Barcode,
                                                                    request.IsActive,
                                                                    request.Description,
@@ -29,9 +39,9 @@ namespace WebApi.Controllers.v1
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllProducts()
         {
-            return Ok(await Mediator.Send(new GetAllProductsQuery()));
+            return Ok(await _mediator.Send(new GetAllProductsQuery()));
         }
 
         /// <summary>
@@ -40,9 +50,9 @@ namespace WebApi.Controllers.v1
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetProductById(int id)
         {
-            return Ok(await Mediator.Send(new GetProductByIdQuery { Id = id }));
+            return Ok(await _mediator.Send(new GetProductByIdQuery { Id = id }));
         }
 
         /// <summary>
@@ -51,9 +61,9 @@ namespace WebApi.Controllers.v1
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteProduct(int id)
         {
-            return Ok(await Mediator.Send(new DeleteProductByIdCommandDto { Id = id }));
+            return Ok(await _mediator.Send(new DeleteProductByIdCommandDto { Id = id }));
         }
 
         /// <summary>
@@ -63,13 +73,13 @@ namespace WebApi.Controllers.v1
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPut("[action]")]
-        public async Task<IActionResult> Update(int id, UpdateProductCommandDto command)
+        public async Task<IActionResult> UpdateProduct(int id, UpdateProductCommandDto command)
         {
             if (id != command.Id)
             {
                 return BadRequest();
             }
-            return Ok(await Mediator.Send(command));
+            return Ok(await _mediator.Send(command));
         }
     }
 }

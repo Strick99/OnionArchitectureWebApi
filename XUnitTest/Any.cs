@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Features.ProductFeatures.Commands;
+using Domain.Entities;
 using System;
 using System.Security.Cryptography;
 using System.Text;
@@ -83,16 +84,15 @@ namespace XUnitTest
             };
         }
 
-        //public static ProductDto VendorDto() => new ProductDto
-        //{
-        //    Name = RandomString(),
-        //    Barcode = RandomString(),
-        //    IsActive = true,
-        //    Description = RandomString(),
-        //    Rate = RandomDecimal(),
-        //    BuyingPrice = RandomDecimal(),
-        //    ConfidentialData = RandomString()
-        //};
+        public static CreateProductCommandDto CreateProductCommandDto() => new CreateProductCommandDto
+        {
+            Name = RandomString(),
+            Barcode = RandomString(),
+            IsActive = true,
+            Description = RandomString(),
+            Rate = RandomDecimal(),
+            BuyingPrice = RandomDecimal(),
+        };
 
         //public static ProductDto[] ProductDtoArray(int length = 5) => Enumerable.Range(0, length).Select(i => ProductDto()).ToArray();
     }

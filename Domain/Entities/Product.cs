@@ -10,6 +10,5 @@ namespace Domain.Entities
         public string Description { get; set; }
         public decimal Rate { get; set; }
         public decimal BuyingPrice { get; set; }
-        public string ConfidentialData { get; set; }
     }
 }
